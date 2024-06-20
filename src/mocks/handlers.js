@@ -24,6 +24,7 @@ export const handlers = [
 
   http.put("http://example.com/user/:id", async ({ params, request }) => {
     const { id } = params;
+    
     const newData = await request.json();
     if (!id) {
       return HttpResponse.json({ success: false, message: "Id is required" });

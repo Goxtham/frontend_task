@@ -1,3 +1,5 @@
+// src/db/initDB.js
+
 const dbName = "UserDB";
 const dbVersion = 1;
 const storeName = "users";
@@ -13,7 +15,7 @@ function initiateDB() {
 
   request.onsuccess = (event) => {
     db = event.target.result;
-    console.log("IndexedDB reasy to use!");
+    console.log("IndexedDB ready to use!");
   };
 
   request.onupgradeneeded = (event) => {
@@ -76,6 +78,7 @@ function initiateDB() {
   };
 
   const editUser = (id, updatedUser) => {
+    
     return new Promise((resolve, reject) => {
       const transaction = db.transaction([storeName], "readwrite");
       const store = transaction.objectStore(storeName);
@@ -85,10 +88,10 @@ function initiateDB() {
         if (user) {
           const updatedUserData = { ...user, ...updatedUser };
           const updateRequest = store.put(updatedUserData);
-          updateRequest.onsuccess = (event) => {
+          updateRequest.onsuccess = () => {
             resolve({
               success: true,
-              result: event.target.result,
+              result: updatedUserData,
             });
           };
           updateRequest.onerror = (event) => {
@@ -100,39 +103,35 @@ function initiateDB() {
         } else {
           reject({
             success: false,
-            message: `User not found with id: ${id}`,
+            message: "User not found",
           });
         }
       };
       request.onerror = (event) => {
-        reject(event.target.error);
+        reject({
+          success: false,
+          message: event.target.error,
+        });
       };
     });
   };
 
   const deleteUser = (id) => {
     return new Promise((resolve, reject) => {
-      console.log("deleteUser", id);
-      try {
-        const transaction = db.transaction([storeName], "readwrite");
-        const store = transaction.objectStore(storeName);
-        const request = store.delete(parseInt(id));
-        request.onsuccess = (event) => {
-          console.log("deleteUser success", event);
-          resolve({
-            success: true,
-            result: event.target.result,
-          });
-        };
-        request.onerror = (event) => {
-          reject({
-            success: false,
-            message: event.target.error,
-          });
-        };
-      } catch (e) {
-        console.log(e);
-      }
+      const transaction = db.transaction([storeName], "readwrite");
+      const store = transaction.objectStore(storeName);
+      const request = store.delete(parseInt(id));
+
+      request.onsuccess = () => {
+        resolve({ success: true });
+      };
+
+      request.onerror = (event) => {
+        reject({
+          success: false,
+          message: event.target.error,
+        });
+      };
     });
   };
 

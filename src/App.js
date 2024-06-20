@@ -1,20 +1,24 @@
+// src/App.js
+
 import React from "react";
-import "./assets/css/style.css";
+import "./assets/css/style.css"; // Make sure your CSS file path is correct
 import { connect } from "react-redux";
-import "../node_modules/antd/dist/antd.css";
+import "../node_modules/antd/dist/antd.css"; // Ant Design CSS if used
 import MainComponent from "./components/mainComponent";
 import { addUser, getUsers } from "./actions/userActions";
+import "./assets/css/style.css";
 
 function App(props) {
   return (
-    <div>
+    <div className="App">
       <MainComponent {...props} />
     </div>
   );
 }
 
 const mapStateToProps = (state) => ({
-  ...state,
+  // Map all your reducers to props
+  userState: state.userState, // Assuming you have userState in your combined reducers
 });
 
 const mapDispatchToProps = {
