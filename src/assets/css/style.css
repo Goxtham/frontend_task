@@ -52,5 +52,12 @@
     background-color: #f2f2f2;
   }
   .ant-table-cell {
-    padding: 4px;
+    padding: 2px;
+  }
+  .ant-table {
+    border-collapse: collapse;
+  }
+  
+  .ant-btn {
+    padding: 4px 8px !important; /* Adjust button padding */
   }

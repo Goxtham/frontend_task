@@ -32,7 +32,7 @@ const MainComponent = ({ userState, getUsers, addUser, editedUser, deleteUser })
 
   const handleDeleteUser = (id) => {
     Swal.fire({
-      title: 'Do you want to save the changes?',
+      title: 'Do you want to Delete this User?',
       showDenyButton: true,
       showCancelButton: false,
       confirmButtonText: 'Yes',

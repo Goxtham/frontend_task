@@ -35,27 +35,29 @@ const InputHandler = ({ onSubmit, editMode = false, initialData = {} }) => {
   };
 
   return (
-    <Row justify="center" style={{ marginBottom: 16 }}>
-      <Col xs={20} sm={16} md={12} lg={8}>
-        <div style={{ marginBottom: 8 }}>
+    <Row justify="center" align="middle" style={{ height: "30vh" }}>
+      <Col xs={20} sm={16} md={12} lg={8} style={{ paddingTop: "2vh" }}>
+        <div style={{ textAlign: "center", marginBottom: 16}}>
           <Input
             placeholder="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            style={{ width: "50%" }}
           />
         </div>
-        <div style={{ marginBottom: 8 }}>
+        <div style={{ textAlign: "center", marginBottom: 16 }}>
           <Input
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            style={{ width: "50%" }}
           />
         </div>
         <div style={{ textAlign: "center" }}>
           <Button
             type="primary"
             onClick={handleSubmit}
-            style={{ width: "50%" }}
+            style={{ width: "25%" }}
           >
             {editMode ? "Edit user" : "Add user"}
           </Button>

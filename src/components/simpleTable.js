@@ -37,6 +37,7 @@ const SimpleTable = ({ dataSource }) => {
       rowKey="id"
       pagination={false}
       bordered
+      style={{ marginTop: 16 }}
       size="small"
     />
   );
